@@ -19,6 +19,10 @@ public class Member {
     private Long id;
     private String name;
 
+    @OneToOne
+    @JoinColumn(name="locker_id")
+    private Locker locker;
+
     // 일대다 양방향ㅎ
     @ManyToOne
     @JoinColumn(name="team_id",insertable = false, updatable = false)
