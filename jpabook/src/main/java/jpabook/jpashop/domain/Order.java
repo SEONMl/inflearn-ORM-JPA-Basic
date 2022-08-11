@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,9 +17,22 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="order_id")
     private Long id;
-    @Column(name="member_id")
-    private Long memberId;
+
+    @ManyToOne
+    @JoinColumn(name="member_id")
+    private Member member;
+
     @Enumerated(EnumType.STRING)
-    private LocalDateTime orderDate;
     private OrderStatus status;
+    private LocalDateTime orderDate;
+
+    // 이건 가치가 있음
+    // 주문서를 뽑았을 때 주문 내역이 나오게
+    @OneToMany(mappedBy = "order")
+    List<OrderItem> orderItems = new ArrayList<>();
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
 }
