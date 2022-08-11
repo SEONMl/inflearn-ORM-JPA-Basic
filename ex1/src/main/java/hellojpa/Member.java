@@ -15,6 +15,13 @@ public class Member {
 
     private Integer age;
 
+//    @Column(name="Team_id")
+//    private Long teamId;
+
+    @ManyToOne // 멤버 입장에서 many
+    @JoinColumn(name="team_id") // 관계할 때 조인할 칼럼
+    private Team team;
+
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 

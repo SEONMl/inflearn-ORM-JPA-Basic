@@ -15,22 +15,16 @@ public class JpaMain {
             // JPA는 트랜잭션이 중요
             tx.begin();
             // code
-            /*
+
+            //팀 저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+            //회원 저장
             Member member = new Member();
-            member.setId(1L);
-            member.setName("test");
-
-            등록 : em.persist(member);
-            조회 : Member find = em.find(Member.class, 1L);
-            수정 : member.setName("Hi");
-            삭제 : em.remove(member);
-
-            JPQL : 엔티티 객체를 대상으로 쿼리
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-            .setFirstResult(5)
-            .setMaxResults(0)
-            .getResultList();
-             */
+            member.setName("member1");
+            member.setTeam(team); //단방향 연관관계 설정, 참조 저장
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
