@@ -19,6 +19,6 @@ public class Item {
     private String price;
     private int StockQuantity;
 
-    @ManyToMany(mappedBy = "items")
+    @ManyToMany(mappedBy = "items") // 쓰지 말자
     private List<Category> categories = new ArrayList<>();
 }
