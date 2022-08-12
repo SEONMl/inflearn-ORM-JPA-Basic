@@ -5,8 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -23,9 +21,8 @@ public class Member {
     @JoinColumn(name="locker_id")
     private Locker locker;
 
-    // 일대다 양방향ㅎ
-    @ManyToOne
-    @JoinColumn(name="team_id",insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY) // 프록시로 조회
+    @JoinColumn(name="team_id")
     private Team team;
     // 로직이 들어가면 getter, setter 사용 지양
 }
