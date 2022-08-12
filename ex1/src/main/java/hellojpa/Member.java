@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -17,12 +18,17 @@ public class Member {
     private Long id;
     private String name;
 
-    @OneToOne
-    @JoinColumn(name="locker_id")
-    private Locker locker;
+    //Period
+//    private LocalDateTime startDate;
+//    private LocalDateTime endDate;
+    @Embedded
+    private Period period;
 
-    @ManyToOne(fetch = FetchType.LAZY) // 프록시로 조회
-    @JoinColumn(name="team_id")
-    private Team team;
+    //Address
+//    private String city;
+//    private String street;
+//    private String zipcode;
+    @Embedded
+    private Address address;
     // 로직이 들어가면 getter, setter 사용 지양
 }
