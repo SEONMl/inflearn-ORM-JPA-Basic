@@ -16,9 +16,10 @@ public class Member {
     @Column(name="member_id")
     private Long id;
     private String name;
-    private String city;
-    private String street;
-    private String zipcode;
+
+    @Embedded
+    private Address address;
+
 
     // Member에 Orders를 넣는 것은 좋지 않다
     @OneToMany(mappedBy = "member")
