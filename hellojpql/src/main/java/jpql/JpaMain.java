@@ -20,11 +20,14 @@ public class JpaMain {
             em.persist(member);
 
             // 파라미터 바인딩은 그냥 쓰지 마세요
-            TypedQuery<Member> query = em.createQuery("select m from Member m where m.username=:username", Member.class);
-            query.setParameter("username","kim");
+            em.createQuery("select new jpql.MemberDto(m.username, m.age) from Member m", MemberDto.class)
+                    .getResultList();
 
-            List<Member> resultList = query.getResultList();
-
+            // 페이징
+            List<Member> result = em.createQuery("select m from Member m order by m.age desc", Member.class)
+                    .setFirstResult(1)
+                    .setMaxResults(10)
+                    .getResultList();
 
             tx.commit();
         } catch (Exception e) {
